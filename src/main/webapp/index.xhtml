@@ -1,0 +1,212 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	template="./template.xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	xmlns:f="http://java.sun.com/jsf/core">
+	<ui:define name="Conteudo">
+
+		<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+
+			<!--/.row-->
+
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="page-header">Bem-Vindo #{menuMB.nomeUsuario}</h1>
+				</div>
+			</div>
+			<!--/.row-->
+
+			<div class="panel panel-container">
+			<h:panelGroup rendered="#{menuMB.isAluno()}">
+				<div class="row">
+					<div class="col-xs-6 col-md-3 col-lg-6 no-padding">
+						<div class="panel panel-teal panel-widget border-right">
+							<div class="row no-padding">
+								<em class="fa fa-xl fa fa-copy color-blue"></em>
+								<div class="large">#{relatorioProdAcMB.producoes.size()}</div>
+								<div class="text-muted">Produções</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-3 col-lg-6 no-padding">
+						<div class="panel panel-blue panel-widget border-right">
+							<div class="row no-padding">
+								<em class="fa fa-xl fa fa-clipboard color-orange"></em>
+								<div class="large">#{projetoMB.projetos.size()}</div>
+								<div class="text-muted">Projetos</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</h:panelGroup>
+				<!--/.row-->
+				<h:panelGroup rendered="#{!menuMB.isAluno()}">
+				<div class="row">
+					<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+						<div class="panel panel-teal panel-widget border-right">
+							<div class="row no-padding">
+								<em class="fa fa-xl fa fa-copy color-blue"></em>
+								<div class="large">#{relatorioProdAcMB.producoes.size()}</div>
+								<div class="text-muted">Produções</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+						<div class="panel panel-blue panel-widget border-right">
+							<div class="row no-padding">
+								<em class="fa fa-xl fa fa-clipboard color-orange"></em>
+								<div class="large">#{projetoMB.projetos.size()}</div>
+								<div class="text-muted">Projetos</div>
+							</div>
+						</div>
+					</div>
+					
+						<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+							<div class="panel panel-orange panel-widget border-right">
+								<div class="row no-padding">
+									<em class="fa fa-xl fa-users color-teal"></em>
+									<div class="large">#{alunoMB.alunos.size() +
+										docenteMB.docentes.size() + projetoMB.externos.size()}</div>
+									<div class="text-muted">Usuários</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="col-xs-6 col-md-3 col-lg-3 no-padding">
+							<div class="panel panel-red panel-widget ">
+								<div class="row no-padding">
+									<em class="fa fa-xl fa-search color-red"></em>
+									<h:panelGroup rendered="#{menuMB.isDiretor()}">
+										<div class="large">#{aprovarProducaoDiretorMB.aprovaProducoes.size()}</div>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{menuMB.isProfessor()}">
+										<div class="large">#{aprovarProducaoProfessorMB.aprovaProducoes.size()}</div>
+									</h:panelGroup>
+									<div class="text-muted">Produções pendentes</div>
+								</div>
+							</div>
+						</div>
+				</div>
+				</h:panelGroup>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<em class="glyphicon glyphicon-list-alt" />&nbsp;&nbsp;&nbsp;
+							<h:outputLabel style="font-size: 23px;"> Acompanhamento do
+							Sistema</h:outputLabel>
+						</div>
+						<div class="panel-body">
+							<div class="canvas-wrapper">
+								<h:panelGroup rendered="#{menuMB.isDiretor()}">
+									<em class="fa fa-xl fa-user-tie" style="color: darkBlue;"></em> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Diretores Cadastrados: #{docenteMB.qtdDiretor}</h:outputLabel>
+									<br />
+									<br />
+									<em class="fa fa-xl fa-chalkboard-teacher"
+										style="color: darkBlue;"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Professores Cadastrados: #{docenteMB.qtdProfessor}</h:outputLabel>
+									<br />
+									<br />
+									<em class="fa fa-xl fa-user-graduate" style="color: darkBlue;"></em>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Alunos Cadastrados: #{alunoMB.alunos.size()}</h:outputLabel>
+									<br />
+									<br />
+									<em class="fa fa-xl fa-user-tag" style="color: darkBlue;"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Externos Cadastrados: #{externoMB.externos.size()}</h:outputLabel>
+									<br />
+									<br />
+								</h:panelGroup>
+								<em class="fa fa-xl fa-book"></em> &nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Livro: #{relatorioProdAcMB.qtdLivro}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-book-open"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Revista/Jornal: #{relatorioProdAcMB.qtdRevistaJornal}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-newspaper"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Periódico: #{relatorioProdAcMB.qtdPeriodico}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-atlas"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Trabalho em Anais: #{relatorioProdAcMB.qtdTrabalhoAnais}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-globe-americas"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Tradução: #{relatorioProdAcMB.qtdTraducao}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-users-cog"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Serviços Técnicos: #{relatorioProdAcMB.qtdServicosTecnicos}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-map"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Cartas, Mapas ou Similares: #{relatorioProdAcMB.qtdCartasMapas}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-calendar-alt"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Curso de Curta Duração: #{relatorioProdAcMB.qtdCursoCurto}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-tablet-alt"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Desenvolvimento de Aplicativo: #{relatorioProdAcMB.qtdDesenApp}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-bookmark"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Desenv. Material Didático e Institucional: #{relatorioProdAcMB.qtdDesenMaterial}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-box-open"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Desenvolvimento de Produto: #{relatorioProdAcMB.qtdDesenProduto}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-pen-square"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Editoria: #{relatorioProdAcMB.qtdEditoria}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-calendar"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Organização Evento: #{relatorioProdAcMB.qtdOrgEvento}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-file-contract"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Relatório de Pesquisa: #{relatorioProdAcMB.qtdRelatorioPesquisa}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-clipboard-check"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Apresentação de Trabalho: #{relatorioProdAcMB.qtdApresentacaoTrabalho}</h:outputLabel>
+								<br /> <br /> <em class="fa fa-xl fa-ellipsis-h"></em>
+								&nbsp;&nbsp;&nbsp;
+								<h:outputLabel style="font-size: 19px;">Total de Produções do tipo Outros: #{relatorioProdAcMB.qtdOutro}</h:outputLabel>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/.row-->
+
+		</div>
+		<!--/.main-->
+
+		<!-- 	<script type="text/javaScript">
+// 		window.onload = function () {
+// 	var chart1 = document.getElementById("line-chart").getContext("2d");
+// 	window.myLine = new Chart(chart1).Line(lineChartData, {
+// 	responsive: true,
+// 	scaleLineColor: "rgba(0,0,0,.2)",
+// 	scaleGridLineColor: "rgba(0,0,0,.05)",
+// 	scaleFontColor: "#c5c7cc"
+// 	});
+// }; -->
+		<!-- 	</script> -->
+
+		<script type="text/javascript">
+			WebFontConfig = {
+				google : {
+					families : [ 'Roboto::latin' ]
+				}
+			};
+			(function() {
+				var wf = document.createElement('script');
+				wf.src = ('https:' == document.location.protocol ? 'https'
+						: 'http')
+						+ '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+				wf.type = 'text/javascript';
+				wf.async = 'true';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(wf, s);
+			})();
+		</script>
+
+	</ui:define>
+</ui:composition>
